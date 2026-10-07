@@ -24,7 +24,7 @@
         </div>
         <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">MindPath</span>
       </div>
-      <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">Pro Assessment</span>
+      <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">Comprehensive Assessment</span>
     </div>
   </header>
 
@@ -34,8 +34,8 @@
     <!-- View 1: Hub Home -->
     <div id="view-home" class="space-y-8">
       <div class="text-center space-y-4 max-w-2xl mx-auto">
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white">Discover Your Authentic Career & Personality Path</h1>
-        <p class="text-slate-400 text-base md:text-lg">Take our multi-dimensional career assessment powered by global vocational models (RIASEC) to match with diverse modern professions.</p>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white">In-Depth Career & Personality Profiler</h1>
+        <p class="text-slate-400 text-base md:text-lg">Take our 10-question vocational assessment based on Holland's RIASEC model to get a genuine analysis of your strengths and ideal industry.</p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 pt-4">
@@ -45,11 +45,11 @@
             <div class="w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
               <i data-lucide="briefcase" class="w-6 h-6"></i>
             </div>
-            <h2 class="text-xl font-bold text-white">Full-Spectrum Career Quiz</h2>
-            <p class="text-slate-400 text-sm">Analyze whether you fit best in Business, Healthcare, Creative Media, Engineering, Public Service, Law, or Education.</p>
+            <h2 class="text-xl font-bold text-white">Complete Career Assessment</h2>
+            <p class="text-slate-400 text-sm">10 detailed questions mapping your interest in Engineering, Science, Art, Healthcare, Entrepreneurship, and Management.</p>
           </div>
           <button onclick="startQuiz('career')" class="mt-6 w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
-            Start Career Quiz <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            Start Career Test (10 Qs) <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
 
@@ -59,11 +59,11 @@
             <div class="w-12 h-12 bg-violet-600/20 text-violet-400 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
               <i data-lucide="user-check" class="w-6 h-6"></i>
             </div>
-            <h2 class="text-xl font-bold text-white">Work Dynamics Test</h2>
-            <p class="text-slate-400 text-sm">Discover how your thinking style, leadership traits, and stress response impact your work culture ideal.</p>
+            <h2 class="text-xl font-bold text-white">Work Personality Profiler</h2>
+            <p class="text-slate-400 text-sm">10 diagnostic questions measuring decision-making style, social focus, adaptability, and execution habits.</p>
           </div>
           <button onclick="startQuiz('personality')" class="mt-6 w-full py-3 bg-violet-600 hover:bg-violet-500 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2">
-            Start Personality Test <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            Start Personality Test (10 Qs) <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
@@ -73,7 +73,7 @@
     <div id="view-quiz" class="hidden max-w-2xl mx-auto space-y-6">
       <div class="flex items-center justify-between text-sm text-slate-400">
         <span id="quiz-title" class="font-semibold text-indigo-400">Assessment</span>
-        <span id="progress-text">Question 1 of 5</span>
+        <span id="progress-text">Question 1 of 10</span>
       </div>
       
       <!-- Progress Bar -->
@@ -97,11 +97,11 @@
       </div>
       
       <div class="space-y-2">
-        <span class="text-xs uppercase tracking-widest text-slate-400">Your Recommended Trajectory</span>
+        <span class="text-xs uppercase tracking-widest text-slate-400">Your Recommended Primary Archetype</span>
         <h2 id="result-title" class="text-2xl md:text-3xl font-extrabold text-indigo-400">Result Title</h2>
       </div>
 
-      <p id="result-desc" class="text-slate-300 leading-relaxed text-sm md:text-base">Detailed description of the result profile.</p>
+      <p id="result-desc" class="text-slate-300 leading-relaxed text-sm md:text-base text-left bg-slate-900/50 p-4 rounded-xl border border-slate-700/50">Detailed description of the result profile.</p>
 
       <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
         <button onclick="resetApp()" class="py-3 px-6 bg-slate-700 hover:bg-slate-600 text-white font-semibold rounded-xl transition">
@@ -114,7 +114,7 @@
 
   <!-- Footer -->
   <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-    <p>© 2026 MindPath Hub. Built by Ekam.</p>
+    <p>© 2026 MindPath Assessment Engine. Built by Ekam.</p>
   </footer>
 
   <script>
@@ -123,72 +123,204 @@
     const quizData = {
       career: [
         {
-          q: "When given a blank project, what kind of work excites you most?",
+          q: "1. What kind of hands-on task appeals to you most during a free weekend?",
           options: [
-            { text: "Designing visual layouts, creative media, or writing stories", type: "Creative" },
-            { text: "Building systems, physical equipment, or software architecture", type: "Technical" },
-            { text: "Investigating research, medical science, or analyzing complex data", type: "Scientific" },
-            { text: "Leading team strategy, negotiating deals, or launching businesses", type: "Leadership" },
-            { text: "Teaching, counseling, or directly helping people in need", type: "Social" },
-            { text: "Managing budgets, financial ledgers, operations, or legal policy", type: "Operations" }
+            { text: "Fixing electronics, building furniture, or working with physical tools", type: "Realistic" },
+            { text: "Reading research papers, solving logic puzzles, or studying data trends", type: "Investigative" },
+            { text: "Sketching visuals, editing video/audio, or writing story concepts", type: "Artistic" },
+            { text: "Volunteering, mentoring someone, or organizing a community meet", type: "Social" },
+            { text: "Pitching a business idea, trading stocks, or negotiating a deal", type: "Enterprising" },
+            { text: "Organizing files, balancing a personal budget, or setting up daily schedules", type: "Conventional" }
           ]
         },
         {
-          q: "Which daily environment feels like the best fit for your energy?",
+          q: "2. When working on a team project, which responsibility do you naturally take on?",
           options: [
-            { text: "A creative studio, digital canvas, or production set", type: "Creative" },
-            { text: "An engineering lab, workshop, or tech dev station", type: "Technical" },
-            { text: "A research clinic, healthcare facility, or analytics hub", type: "Scientific" },
-            { text: "A boardroom, corporate office, or fast-paced startup", type: "Leadership" },
-            { text: "A classroom, community center, or therapy environment", type: "Social" },
-            { text: "A structured accounting firm, bank, or management office", type: "Operations" }
+            { text: "Handling technical execution, hardware setups, or backend code", type: "Realistic" },
+            { text: "Analyzing the core problem, calculating metrics, and verifying facts", type: "Investigative" },
+            { text: "Designing presentation slides, user interfaces, or branding materials", type: "Artistic" },
+            { text: "Ensuring team harmony, checking on members, and mediating conflicts", type: "Social" },
+            { text: "Pitching the final product to stakeholders and leading the roadmap", type: "Enterprising" },
+            { text: "Managing documentation, deadlines, resources, and task trackings", type: "Conventional" }
           ]
         },
         {
-          q: "What kind of impact do you want your work to have on the world?",
+          q: "3. Which of these work environments sounds most satisfying for long-term growth?",
           options: [
-            { text: "Inspiring people through art, storytelling, and design", type: "Creative" },
-            { text: "Solving complex technical problems and building tools", type: "Technical" },
-            { text: "Advancing human health, science, and discovery", type: "Scientific" },
-            { text: "Growing organizations, generating wealth, and leading teams", type: "Leadership" },
-            { text: "Empowering individuals, mentoring, and building community", type: "Social" },
-            { text: "Ensuring order, compliance, financial accuracy, and efficiency", type: "Operations" }
+            { text: "A high-tech workshop, field lab, or engineering facility", type: "Realistic" },
+            { text: "A quiet research institute, data center, or analytical lab", type: "Investigative" },
+            { text: "A design agency, creative studio, or media workspace", type: "Artistic" },
+            { text: "A school, university, hospital, or counseling center", type: "Social" },
+            { text: "A fast-paced corporate office, trading floor, or startup space", type: "Enterprising" },
+            { text: "A structured accounting firm, bank, or administrative hub", type: "Conventional" }
+          ]
+        },
+        {
+          q: "4. How do you prefer to tackle a complex challenge?",
+          options: [
+            { text: "Experimenting directly with physical objects or machinery to test fixes", type: "Realistic" },
+            { text: "Breaking the problem down mathematically and systematically searching for root causes", type: "Investigative" },
+            { text: "Thinking completely out-of-the-box to come up with unorthodox creative solutions", type: "Artistic" },
+            { text: "Discussing the issue with others to gather perspectives and reach a consensus", type: "Social" },
+            { text: "Taking command, delegating roles quickly, and pushing for rapid implementation", type: "Enterprising" },
+            { text: "Reviewing standard procedures, manuals, and proven historical data", type: "Conventional" }
+          ]
+        },
+        {
+          q: "5. What type of achievement gives you the strongest sense of accomplishment?",
+          options: [
+            { text: "Building a functional mechanical system or solid software tool", type: "Realistic" },
+            { text: "Discovering a hidden insight, scientific truth, or key data finding", type: "Investigative" },
+            { text: "Creating an original piece of art, film, UI design, or compelling text", type: "Artistic" },
+            { text: "Helping someone overcome a major obstacle or master a difficult skill", type: "Social" },
+            { text: "Closing a profitable sale, scaling an operation, or winning a pitch", type: "Enterprising" },
+            { text: "Streamlining a messy workflow so it operates with zero errors", type: "Conventional" }
+          ]
+        },
+        {
+          q: "6. Which subject area would you choose to study deeply if tuition was free?",
+          options: [
+            { text: "Robotics, Civil Engineering, or Automotive Systems", type: "Realistic" },
+            { text: "Artificial Intelligence, Astrophysics, or Clinical Neuroscience", type: "Investigative" },
+            { text: "Graphic Communication, Screenwriting, or Industrial Design", type: "Artistic" },
+            { text: "Psychology, Sociology, or Educational Leadership", type: "Social" },
+            { text: "Venture Capital, International Business, or Law", type: "Enterprising" },
+            { text: "Financial Auditing, Supply Chain Logistics, or Data Governance", type: "Conventional" }
+          ]
+        },
+        {
+          q: "7. How do you evaluate whether a tool or product is high quality?",
+          options: [
+            { text: "By its durability, physical precision, and mechanical power", type: "Realistic" },
+            { text: "By its technological efficiency, algorithm speed, and accuracy", type: "Investigative" },
+            { text: "By its visual beauty, aesthetics, and user interface design", type: "Artistic" },
+            { text: "By how much positive value it brings to people's daily lives", type: "Social" },
+            { text: "By its market demand, profitability, and competitive edge", type: "Enterprising" },
+            { text: "By its reliability, safety certifications, and compliance standards", type: "Conventional" }
+          ]
+        },
+        {
+          q: "8. What kind of daily problem frustrates you the most?",
+          options: [
+            { text: "Flimsy equipment or software full of practical bugs", type: "Realistic" },
+            { text: "Illogical claims made without solid facts or evidence", type: "Investigative" },
+            { text: "Boring, repetitive layouts and lack of room for creativity", type: "Artistic" },
+            { text: "Selfish behavior and lack of empathy in group settings", type: "Social" },
+            { text: "Slow decision-making and missed commercial opportunities", type: "Enterprising" },
+            { text: "Disorganization, missing paperwork, and unstructured processes", type: "Conventional" }
+          ]
+        },
+        {
+          q: "9. What topic do you enjoy reading about or watching videos on?",
+          options: [
+            { text: "How things are manufactured, engineered, or repaired", type: "Realistic" },
+            { text: "Deep dives into scientific breakthroughs or tech breakdowns", type: "Investigative" },
+            { text: "Art tutorials, design critiques, film analysis, or creative writing", type: "Artistic" },
+            { text: "Human behavior, mental health, and social commentary", type: "Social" },
+            { text: "Case studies of successful entrepreneurs and business empires", type: "Enterprising" },
+            { text: "Personal finance management, investing strategies, and productivity setups", type: "Conventional" }
+          ]
+        },
+        {
+          q: "10. What is your ultimate goal for your professional legacy?",
+          options: [
+            { text: "To create tangible, reliable physical or digital systems that stand the test of time", type: "Realistic" },
+            { text: "To contribute new knowledge, algorithms, or scientific solutions to the world", type: "Investigative" },
+            { text: "To build iconic creative work that inspires and moves audiences", type: "Artistic" },
+            { text: "To make a direct, positive difference in the health and lives of thousands", type: "Social" },
+            { text: "To build and lead an influential organization or high-value enterprise", type: "Enterprising" },
+            { text: "To maintain gold-standard precision, financial stability, and operational order", type: "Conventional" }
           ]
         }
       ],
       personality: [
         {
-          q: "How do you prefer to approach major choices and work tasks?",
+          q: "1. After a long week of intense work, how do you prefer to restore your energy?",
           options: [
-            { text: "Relying on logic, cold data, and objective analysis", type: "Analytical" },
-            { text: "Trusting human empathy, team consensus, and personal values", type: "Relational" },
-            { text: "Following strict plans, schedules, and organized checklists", type: "Structured" },
-            { text: "Adapting spontaneously as new situations evolve", type: "Adaptable" }
+            { text: "Solitary activities like gaming, coding, reading, or quiet reflection", type: "Introverted" },
+            { text: "Socializing with friends, going to events, or dynamic group outings", type: "Extroverted" }
           ]
         },
         {
-          q: "Where do you draw most of your daily focus and motivation?",
+          q: "2. When making an important personal or professional decision, what comes first?",
           options: [
-            { text: "Deep, quiet individual work where I can think uninterrupted", type: "Introverted" },
-            { text: "Active team brainstorming, group discussions, and high engagement", type: "Extroverted" }
+            { text: "Strict objective facts, logical consistency, and data", type: "Analytical" },
+            { text: "The human impact, personal values, and feelings of those involved", type: "Relational" }
+          ]
+        },
+        {
+          q: "3. How do you keep track of your goals and daily commitments?",
+          options: [
+            { text: "Detailed calendars, to-do lists, and structured schedules", type: "Structured" },
+            { text: "Mental notes and flexible adjustments as events unfold", type: "Adaptable" }
+          ]
+        },
+        {
+          q: "4. In a debate or heated disagreement, how do you usually respond?",
+          options: [
+            { text: "I focus calmly on debunking flawed arguments using clear evidence", type: "Analytical" },
+            { text: "I listen carefully to understand emotional underlying motivations and build bridges", type: "Relational" }
+          ]
+        },
+        {
+          q: "5. How do you feel about working in open, high-frequency communication channels?",
+          options: [
+            { text: "I prefer async updates so I can focus deeply without constant pinging", type: "Introverted" },
+            { text: "I love real-time brain-dumping and active live conversation", type: "Extroverted" }
+          ]
+        },
+        {
+          q: "6. When faced with sudden unexpected changes to a plan, you typically:",
+          options: [
+            { text: "Feel annoyed by the disruption and immediately create an updated schedule", type: "Structured" },
+            { text: "Roll with the punches and pivot naturally without much stress", type: "Adaptable" }
+          ]
+        },
+        {
+          q: "7. What kind of tasks give you the most 'flow state' focus?",
+          options: [
+            { text: "Deep, independent research or technical execution", type: "Introverted" },
+            { text: "Interactive workshops, presentations, or group brainstorming", type: "Extroverted" }
+          ]
+        },
+        {
+          q: "8. What do you value most in a project manager or leader?",
+          options: [
+            { text: "Laser-sharp strategic clarity, competence, and fairness", type: "Analytical" },
+            { text: "Empathy, encouragement, and care for team well-being", type: "Relational" }
+          ]
+        },
+        {
+          q: "9. When beginning a brand new project, what is your first instinct?",
+          options: [
+            { text: "Draft an outline, set milestones, and organize folder structures", type: "Structured" },
+            { text: "Jump straight into experimenting and figure out structure along the way", type: "Adaptable" }
+          ]
+        },
+        {
+          q: "10. How do you evaluate your own personal success?",
+          options: [
+            { text: "By concrete metrics, skill mastery, and objective targets hit", type: "Analytical" },
+            { text: "By the quality of my relationships and positive community impact", type: "Relational" }
           ]
         }
       ]
     };
 
     const resultDescriptions = {
-      "Creative": "Creative & Media Strategy: You thrive in self-expression, visual arts, and content innovation! Careers like UX/UI Designer, Film Director, Copywriter, Brand Strategist, and Art Director match your visionary style.",
-      "Technical": "Engineering & Technology: You are a system builder! Professions like Full-Stack Developer, Mechanical Engineer, Cybersecurity Analyst, and Robotics Engineer suit your practical, hands-on problem-solving.",
-      "Scientific": "Research & Healthcare: You are driven by curiosity and discovery! Ideal fields include Data Scientist, Medical Practitioner, Biomedical Researcher, Financial Quant, and Environmental Specialist.",
-      "Leadership": "Entrepreneurship & Management: You are a natural driver of growth! High-impact roles like Business Executive, Startup Founder, Marketing Manager, Venture Capitalist, and Sales Director fit your ambition.",
-      "Social": "Education & Human Services: You care deeply about empowering others! Thriving roles include Psychologist, Academic Educator, HR Director, Career Counselor, and Non-Profit Leader.",
-      "Operations": "Finance & Legal Operations: You bring structure, reliability, and precision! Top-fit roles include Chartered Accountant, Financial Analyst, Corporate Lawyer, Operations Director, and Compliance Specialist.",
-      "Analytical": "Data-Driven Thinker: You make decisions based on clear evidence, objective facts, and structured reasoning.",
-      "Relational": "People-Centric Counselor: You bring strong empathy, active listening, and team harmony to every work culture.",
-      "Structured": "Master Organizer: You excel when managing clear guidelines, detailed workflows, and organized timelines.",
-      "Adaptable": "Agile Innovator: You thrive in fast-changing, flexible environments where quick pivot thinking is required.",
-      "Introverted": "Focused Deep-Worker: You produce your best results when given autonomy, quiet focus, and specialized projects.",
-      "Extroverted": "Collaborative Communicator: You energize team culture, public relationships, and group execution."
+      "Realistic": "Realistic Archetype (The Doer): You excel in practical, hands-on environments requiring physical or technical precision. Top Career Pathways: Robotics Engineering, Systems Architecture, Civil Engineering, Cybersecurity Operations, Construction Management, and Avionics.",
+      "Investigative": "Investigative Archetype (The Thinker): You are driven by intellectual curiosity, research, and complex problem-solving. Top Career Pathways: Data Science, Clinical Medical Research, Artificial Intelligence Engineering, Financial Quantitative Analysis, and Astrophysics.",
+      "Artistic": "Artistic Archetype (The Creator): You thrive in unstructured environments where self-expression and visual innovation dominate. Top Career Pathways: UX/UI Design, Product Design, Film & Media Direction, Brand Strategy, Creative Writing, and Game World Design.",
+      "Social": "Social Archetype (The Helper): You are motivated by empowering, teaching, and serving others. Top Career Pathways: Clinical Psychology, Educational Leadership, Healthcare Management, HR Strategy, Career Counseling, and Non-Profit Administration.",
+      "Enterprising": "Enterprising Archetype (The Persuader): You possess strong commercial drive, leadership, and negotiation skills. Top Career Pathways: Venture Capital, Startup Founding, Product Management, Corporate Law, Marketing Directorship, and Executive Management.",
+      "Conventional": "Conventional Archetype (The Organizer): You bring precision, financial accuracy, and organizational structure. Top Career Pathways: Chartered Accountancy, Financial Auditing, Operations Strategy, Compliance Management, and Supply Chain Architecture.",
+      
+      "Introverted": "Focused Deep-Worker: You produce your most groundbreaking results through autonomous, quiet focus and deep domain specialization.",
+      "Extroverted": "Collaborative Communicator: You draw immense energy from group synergy, active discussions, public relations, and live teamwork.",
+      "Analytical": "Logic & Data Strategist: You navigate complex decisions methodically, prioritizing cold evidence, structure, and objective metrics.",
+      "Relational": "People-Centric Tactician: You excel at understanding human dynamics, team culture, user empathy, and diplomatic resolution.",
+      "Structured": "Systematic Executor: You excel when managing clear guidelines, detailed workflows, thorough documentation, and strict timelines.",
+      "Adaptable": "Agile Innovator: You thrive under fluid circumstances, quickly adapting to dynamic challenges and pivoting on the fly."
     };
 
     let currentQuizType = '';
@@ -204,7 +336,7 @@
       document.getElementById('view-quiz').classList.remove('hidden');
       document.getElementById('view-results').classList.add('hidden');
 
-      document.getElementById('quiz-title').innerText = type === 'career' ? 'Full-Spectrum Career Quiz' : 'Work Dynamics Test';
+      document.getElementById('quiz-title').innerText = type === 'career' ? 'Comprehensive Career Assessment (10 Qs)' : 'Work Personality Profiler (10 Qs)';
       
       renderQuestion();
     }
@@ -223,7 +355,7 @@
       q.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'w-full p-4 rounded-xl bg-slate-800 hover:bg-indigo-600/20 border border-slate-700 hover:border-indigo-500/50 text-left text-slate-200 hover:text-white transition flex justify-between items-center group';
-        btn.innerHTML = `<span>${opt.text}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-indigo-400"></i>`;
+        btn.innerHTML = `<span class="text-sm md:text-base">${opt.text}</span> <i data-lucide="chevron-right" class="w-4 h-4 text-slate-500 group-hover:text-indigo-400 shrink-0 ml-2"></i>`;
         btn.onclick = () => selectOption(opt.type);
         optionsContainer.appendChild(btn);
       });
@@ -249,7 +381,7 @@
       let topResult = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
       document.getElementById('result-title').innerText = topResult;
-      document.getElementById('result-desc').innerText = resultDescriptions[topResult] || "You possess a balanced set of interests across multiple professional areas!";
+      document.getElementById('result-desc').innerText = resultDescriptions[topResult] || "You possess a balanced profile across multiple professional domains!";
     }
 
     function resetApp() {
