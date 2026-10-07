@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindPath - Career & Personality Assessment</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        accent: {
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.3);
+        }
+
+        .glow-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .option-btn {
+            transition: all 0.25s ease;
+        }
+
+        .option-btn:hover {
+            transform: translateX(6px);
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .option-btn.selected {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Fade Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative bg-slate-950 text-slate-100">
+
+    <div class="glow-effect bg-brand-500 top-10 left-10"></div>
+    <div class="glow-effect bg-accent-purple bottom-10 right-10"></div>
+    <div class="glow-effect bg-accent-cyan top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+    <header class="relative z-10 w-full max-w-6xl mx-auto px-4 py-6 flex items-center justify-between border-b border-slate-800/80">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="app.showHome()">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-purple flex items-center justify-center shadow-lg shadow-brand-500/30">
+                <i class="fa-solid fa-compass text-white text-xl"></i>
+            </div>
+            <div>
+                <span class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-brand-500">MindPath</span>
+                <span class="text-xs block text-slate-400 font-medium">Career & Personality Intelligence</span>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button onclick="app.showHome()" class="text-sm font-medium text-slate-400 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-slate-800/50">
+                <i class="fa-solid fa-house mr-1.5"></i> Home
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 py-8 flex-grow flex items-center justify-center w-full">
+
+        <section id="hero-section" class="w-full text-center animate-fade-in">
+            <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold mb-6">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>Discover Your Ideal Career & Core Trait Archetype</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                Unlock Your Potential With <br class="hidden sm:inline"/>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-400 via-accent-purple to-accent-pink">Self-Discovery Assessments</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-400 text-base sm:text-lg mb-10 leading-relaxed">
+                Choose an assessment below to get a detailed breakdown of your strengths, logical frameworks, ideal workplace roles, and core personality archetype.
+            </p>
+
+            <!-- Quiz Choice Cards -->
+            <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                
+                <!-- Career Quiz Card -->
+                <div onclick="app.startQuiz('career')" class="glass-card glass-card-hover p-8 rounded-2xl text-left cursor-pointer group relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-brand-500/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-brand-500/20 text-brand-400 border border-brand-500/30 flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-600 group-hover:text-white transition-all">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors">Career Guidance Quiz</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                            Analyze your work style, economic reasoning, problem-solving preferences, and technical interests to uncover your highest-earning career path.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-semibold text-brand-400 pt-4 border-t border-slate-800">
+                        <span>10 Questions • ~3 Mins</span>
+                        <span class="flex items-center group-hover:translate-x-1 transition-transform">Start Quiz <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                    </div>
+                </div>
+
+                <!-- Personality Test Card -->
+                <div onclick="app.startQuiz('personality')" class="glass-card glass-card-hover p-8 rounded-2xl text-left cursor-pointer group relative overflow-hidden flex flex-col justify-between">
+                    <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-accent-purple/10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div>
+                        <div class="w-14 h-14 rounded-xl bg-accent-purple/20 text-accent-purple border border-accent-purple/30 flex items-center justify-center text-2xl mb-6 group-hover:bg-accent-purple group-hover:text-white transition-all">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent-purple transition-colors">Personality Type Test</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                            Discover your behavioral archetype, decision-making style, social orientation, and mindset strengths through situational questions.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-semibold text-accent-purple pt-4 border-t border-slate-800">
+                        <span>10 Questions • ~3 Mins</span>
+                        <span class="flex items-center group-hover:translate-x-1 transition-transform">Start Test <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="quiz-section" class="w-full max-w-2xl hidden animate-fade-in">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-slate-800 relative">
+                
+                <!-- Progress Header -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between text-xs sm:text-sm font-semibold text-slate-400 mb-3">
+                        <span id="quiz-title-badge" class="uppercase tracking-wider text-brand-400 font-bold">Career Assessment</span>
+                        <span>Question <span id="current-question-num" class="text-white">1</span> of <span id="total-questions-num">10</span></span>
+                    </div>
+                    <!-- Progress Bar -->
+                    <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div id="progress-bar-fill" class="h-full bg-gradient-to-r from-brand-500 to-accent-purple w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Question Prompt -->
+                <div class="mb-8">
+                    <h2 id="question-text" class="text-xl sm:text-2xl font-bold text-white leading-snug">
+                        Loading question...
+                    </h2>
+                </div>
+
+                <!-- Options List -->
+                <div id="options-container" class="space-y-3.5 mb-8">
+                    <!-- Dynamic option buttons injected here -->
+                </div>
+
+                <!-- Footer Navigation Buttons -->
+                <div class="flex items-center justify-between pt-6 border-t border-slate-800/80">
+                    <button id="prev-btn" onclick="app.previousQuestion()" class="px-5 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800 transition-all disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-slate-400" disabled>
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Previous
+                    </button>
+                    <button id="next-btn" onclick="app.nextQuestion()" class="px-6 py-2.5 rounded-xl text-sm font-semibold bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 transition-all disabled:opacity-40 disabled:hover:bg-brand-600">
+                        Next <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="results-section" class="w-full max-w-3xl hidden animate-fade-in">
+            <div class="glass-card p-6 sm:p-10 rounded-3xl border border-slate-800 relative text-left">
+                
+                <!-- Result Badge -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-accent-emerald/10 border border-accent-emerald/30 text-accent-emerald text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>Assessment Complete</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">Your Assessment Profile</h2>
+                    <p class="text-slate-400 text-sm">Based on your strategic choices and analytical preferences</p>
+                </div>
+
+                <!-- Primary Result Card -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800/90 border border-slate-700/80 rounded-2xl p-6 sm:p-8 mb-8 relative overflow-hidden">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold">Matched Archetype</span>
+                            <h3 id="result-archetype" class="text-2xl sm:text-3xl font-extrabold text-brand-400">Strategic Visionary</h3>
+                        </div>
+                        <div id="result-match-badge" class="self-start sm:self-center bg-brand-500/20 text-brand-300 border border-brand-500/30 font-bold px-4 py-2 rounded-xl text-sm">
+                            94% Profile Alignment
+                        </div>
+                    </div>
+                    <p id="result-description" class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                        Description dynamic load...
+                    </p>
+
+                    <!-- Core Strengths Tags -->
+                    <div>
+                        <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold block mb-2.5">Key Core Strengths</span>
+                        <div id="result-tags" class="flex flex-wrap gap-2">
+                            <!-- Dynamic Tag elements -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breakdown & Recommended Paths -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    
+                    <!-- Trait Breakdown -->
+                    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+                        <h4 class="text-base font-bold text-white mb-4 flex items-center">
+                            <i class="fa-solid fa-chart-pie text-brand-400 mr-2"></i> Trait Distribution
+                        </h4>
+                        <div id="trait-bars" class="space-y-4 text-xs">
+                            <!-- Dynamic progress traits -->
+                        </div>
+                    </div>
+
+                    <!-- Recommended Career/Growth Vectors -->
+                    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
+                        <h4 class="text-base font-bold text-white mb-4 flex items-center">
+                            <i class="fa-solid fa-rocket text-accent-purple mr-2"></i> Ideal Career / Role Matches
+                        </h4>
+                        <ul id="recommended-paths" class="space-y-3 text-sm text-slate-300">
+                            <!-- Dynamic Career List -->
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-slate-800">
+                    <button onclick="app.retakeCurrentQuiz()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Retake This Quiz
+                    </button>
+                    <button onclick="app.showHome()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-sm shadow-lg shadow-brand-600/30 transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-list-check mr-2"></i> Try Other Assessment
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="relative z-10 w-full max-w-6xl mx-auto px-4 py-6 border-t border-slate-800/80 text-center sm:flex sm:justify-between sm:items-center text-xs text-slate-400 space-y-2 sm:space-y-0">
+        <p>© 2026 MindPath. Built for multi-passionate creators and future leaders.</p>
+        <p class="flex items-center justify-center space-x-1">
+            <span>Powered by Client-Side Logic</span>
+            <span>•</span>
+            <span class="text-slate-400">Zero Server Cost Architecture</span>
+        </p>
+    </footer>
+
+    <script>
+        // QUESTION DATA BANK
+        const QUIZ_DATA = {
+            career: {
+                title: "Career Guidance Assessment",
+                questions: [
+                    {
+                        question: "When faced with a complex problem, what is your immediate natural reaction?",
+                        options: [
+                            { text: "Break it into logical data points, metrics, and quantitative rules.", category: "analytical" },
+                            { text: "Look at the overall human impact, market trends, and big-picture strategy.", category: "strategic" },
+                            { text: "Design an inventive, visual, or non-conventional solution.", category: "creative" },
+                            { text: "Take immediate charge, coordinate people, and delegate tasks to solve it fast.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "Which type of activity sounds most satisfying to spend a full afternoon on?",
+                        options: [
+                            { text: "Writing scripts, debugging code, or building automated spreadsheets.", category: "analytical" },
+                            { text: "Reading economic analyses, studying history, or debating public policy.", category: "strategic" },
+                            { text: "Designing user interfaces, drafting storylines, or editing video/audio content.", category: "creative" },
+                            { text: "Leading a team pitch, pitching a business proposal, or organizing an event.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "How do you prefer to measure success in your work?",
+                        options: [
+                            { text: "By accuracy, code efficiency, or flawless quantitative precision.", category: "analytical" },
+                            { text: "By long-term strategic influence and systemic market impact.", category: "strategic" },
+                            { text: "By original self-expression and building unique visual/interactive art.", category: "creative" },
+                            { text: "By revenue generated, team growth, and milestone achievements.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "What environment makes you feel most in your element?",
+                        options: [
+                            { text: "A quiet deep-work setup analyzing datasets or building algorithms.", category: "analytical" },
+                            { text: "A research think-tank evaluating economics, trends, and governance.", category: "strategic" },
+                            { text: "A creative studio brainstorming flexible, open-ended visual projects.", category: "creative" },
+                            { text: "A high-energy startup boardroom directing strategy and execution.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "If you were to launch a new digital product tomorrow, what role would you take?",
+                        options: [
+                            { text: "Lead Architect: Writing the backend logic, databases, and APIs.", category: "analytical" },
+                            { text: "Product Strategist: Researching market economics and user psychology.", category: "strategic" },
+                            { text: "UI/UX Designer: Creating the aesthetic interface and branding look.", category: "creative" },
+                            { text: "Founder / CEO: Managing pitch decks, hiring, and company vision.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "Which subject area draws your natural curiosity most when browsing online?",
+                        options: [
+                            { text: "Computer science tutorials, data science, or engineering concepts.", category: "analytical" },
+                            { text: "Global macroeconomics, geopolitical strategy, or behavioral psychology.", category: "strategic" },
+                            { text: "Game design, digital art techniques, or creative storytelling.", category: "creative" },
+                            { text: "Business case studies, founder stories, and negotiation tactics.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "What is your biggest superpower when working in a team?",
+                        options: [
+                            { text: "Finding subtle logical errors, bugs, or data inconsistencies others miss.", category: "analytical" },
+                            { text: "Connecting distant ideas from economics, society, and technology together.", category: "strategic" },
+                            { text: "Bringing fresh, aesthetic, and out-of-the-box creative perspectives.", category: "creative" },
+                            { text: "Motivating teammates, resolving friction, and keeping everyone aligned.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "How do you feel about working with numbers, statistics, and code?",
+                        options: [
+                            { text: "Love it. Numbers and code provide objective truth and total control.", category: "analytical" },
+                            { text: "Enjoy them as tools to understand broader human and economic trends.", category: "strategic" },
+                            { text: "Prefer using them creatively (like game design physics or generative graphics).", category: "creative" },
+                            { text: "Prefer summarizing them into clear decisions for action rather than crunching them.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "Which risk profile fits your approach to building a career?",
+                        options: [
+                            { text: "Low risk: Master specialized technical skills with clear demand.", category: "analytical" },
+                            { text: "Calculated risk: Navigate complex markets with flexible multi-domain expertise.", category: "strategic" },
+                            { text: "Creative risk: Build portfolio projects that stand out from conventional standards.", category: "creative" },
+                            { text: "High leverage: Build or lead initiatives where outcomes scale exponentially.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "What type of project would you most enjoy showcasing on GitHub or a portfolio?",
+                        options: [
+                            { text: "A clean Python machine-learning model or data automation dashboard.", category: "analytical" },
+                            { text: "A research portal analyzing market pricing models or political policy outcomes.", category: "strategic" },
+                            { text: "A playable 2D game built in Pygame/Unity or an interactive web art experience.", category: "creative" },
+                            { text: "An end-to-end SaaS product platform connecting clients with services.", category: "leadership" }
+                        ]
+                    }
+                ]
+            },
+            personality: {
+                title: "Personality Archetype Test",
+                questions: [
+                    {
+                        question: "In social or team settings, where do you usually gain energy?",
+                        options: [
+                            { text: "Quiet individual focus where I can think deeply without interruptions.", category: "analytical" },
+                            { text: "Engaging in deep one-on-one intellectual conversations about ideas.", category: "strategic" },
+                            { text: "Collaborative, creative spitballing sessions with zero boundaries.", category: "creative" },
+                            { text: "Dynamic group environments where decisions and movement are happening.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "How do you make big life or career decisions?",
+                        options: [
+                            { text: "Strict pros-and-cons lists, objective facts, and risk probability.", category: "analytical" },
+                            { text: "Evaluating long-term alignment with my personal philosophy and goals.", category: "strategic" },
+                            { text: "Trusting intuition, passion, and what feels most authentic.", category: "creative" },
+                            { text: "Deciding quickly based on momentum, practical outcome, and leverage.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "How do you handle sudden chaotic changes or unexpected challenges?",
+                        options: [
+                            { text: "Pause immediately to re-verify inputs and systematically troubleshoot.", category: "analytical" },
+                            { text: "Step back to map out a alternative multi-step backup strategy.", category: "strategic" },
+                            { text: "Improvise flexibly and invent an unconventional workaround on the spot.", category: "creative" },
+                            { text: "Take active charge to stabilize the team and re-assign tasks.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "What bothers you most in a workplace or academic group?",
+                        options: [
+                            { text: "Inaccurate work, lack of documentation, or sloppy logic.", category: "analytical" },
+                            { text: "Short-sighted thinking that ignores the underlying root cause.", category: "strategic" },
+                            { text: "Rigid rules that suppress fresh ideas and individual expression.", category: "creative" },
+                            { text: "Indecisiveness, slow action, and endless talking without results.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "How do you organize your personal goals and daily work?",
+                        options: [
+                            { text: "Structured systems, precise tracking apps, and detailed checklists.", category: "analytical" },
+                            { text: "Flexible master frameworks focused on key long-term priorities.", category: "strategic" },
+                            { text: "Fluid, burst-based workflows driven by spontaneous inspiration.", category: "creative" },
+                            { text: "High-impact task blocks prioritized strictly by urgency and execution.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "When learning something completely new, what is your preferred approach?",
+                        options: [
+                            { text: "Reading technical documentation, underlying formulas, or source code.", category: "analytical" },
+                            { text: "Understanding the core mental model and economic/societal context first.", category: "strategic" },
+                            { text: "Jumping right in to experiment, build, and learn through trial and error.", category: "creative" },
+                            { text: "Finding an expert or accelerated course to grasp actionable essentials fast.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "What is your stance on following established rules and standard protocols?",
+                        options: [
+                            { text: "Essential for quality, safety, consistency, and error prevention.", category: "analytical" },
+                            { text: "Useful baseline rules, but should be updated as system conditions change.", category: "strategic" },
+                            { text: "Rules are meant to be challenged to discover better creative ways.", category: "creative" },
+                            { text: "Follow them if efficient; bypass them if they slow down progress.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "How do you prefer others to communicate information to you?",
+                        options: [
+                            { text: "With detailed data, clear references, and structured bullet points.", category: "analytical" },
+                            { text: "With high-level strategic context showing 'why' it matters.", category: "strategic" },
+                            { text: "With visual diagrams, stories, and engaging interactive examples.", category: "creative" },
+                            { text: "Short, direct bottom-line summaries with explicit next actions.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "What gives you the highest sense of internal fulfillment?",
+                        options: [
+                            { text: "Solving a tricky logic puzzle or building an error-free technical system.", category: "analytical" },
+                            { text: "Synthesizing complex information into a clear, elegant strategy.", category: "strategic" },
+                            { text: "Bringing an original visual or interactive creation to life from scratch.", category: "creative" },
+                            { text: "Rallying people together to accomplish a ambitious goal.", category: "leadership" }
+                        ]
+                    },
+                    {
+                        question: "If people described you in just one core word, what would you prefer it to be?",
+                        options: [
+                            { text: "Rigorous & Precise", category: "analytical" },
+                            { text: "Insightful & Visionary", category: "strategic" },
+                            { text: "Innovative & Expressive", category: "creative" },
+                            { text: "Driven & Decisive", category: "leadership" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // ARCHETYPE MAPPING DATA
+        const ARCHETYPES = {
+            analytical: {
+                title: "Data Architect & Systems Specialist",
+                description: "You possess a sharp, methodical mind that thrives on logic, precision, and systemic clarity. You excel at breaking down complex, chaotic problems into clean structural frameworks, whether in software engineering, quantitative analysis, or structured problem-solving.",
+                tags: ["Quantitative Logic", "High Attention to Detail", "System Architecture", "Root-Cause Debugging"],
+                paths: [
+                    "Data Analyst / Business Intelligence Engineer",
+                    "Software / Backend Developer",
+                    "Financial & Quantitative Modeler",
+                    "Database Administrator / Cloud Architect"
+                ]
+            },
+            strategic: {
+                title: "Interdisciplinary Strategic Visionary",
+                description: "You are a natural generalist who connects dots across diverse domains like technology, economics, public policy, and human behavior. You resist narrow boxes and excel at seeing the overarching big picture and synthesizing insights.",
+                tags: ["Cross-Domain Synthesis", "Economic Intuition", "Strategic Planning", "Market & Trend Foresight"],
+                paths: [
+                    "Management Consultant / Corporate Strategist",
+                    "Product Manager (Tech & Growth)",
+                    "Policy Analyst / Economic Researcher",
+                    "Business Operations & Strategy Manager"
+                ]
+            },
+            creative: {
+                title: "Creative Tech & Experience Designer",
+                description: "You bridge the gap between technical logic and human artistic expression. You love bringing ideas to life through interactive media, visual aesthetics, game loops, or creative problem-solving that captures imagination.",
+                tags: ["Interactive Storytelling", "UI/UX Aesthetic Logic", "Creative Prototyping", "Out-of-Box Thinking"],
+                paths: [
+                    "Game Developer (Unity / Pygame)",
+                    "UI/UX & Product Designer",
+                    "Front-End Creative Developer",
+                    "Digital Media / Content Systems Strategist"
+                ]
+            },
+            leadership: {
+                title: "High-Leverage Execution Leader",
+                description: "You are driven by action, momentum, and results. You excel at organizing resources, leading teams, navigating risk, and transforming abstract concepts into high-value working realities through clear decision-making.",
+                tags: ["Decisive Execution", "Team Alignment", "Resource Optimization", "High-Leverage Driving"],
+                paths: [
+                    "Tech Entrepreneur / Startup Founder",
+                    "Operations Director",
+                    "Growth & Marketing Strategist",
+                    "Project / Delivery Lead"
+                ]
+            }
+        };
+
+        // APPLICATION STATE MANAGEMENT
+        class QuizApp {
+            constructor() {
+                this.currentType = null; // 'career' or 'personality'
+                this.currentIndex = 0;
+                this.answers = []; // Stores selected category string for each question index
+                
+                // DOM Elements
+                this.heroSection = document.getElementById('hero-section');
+                this.quizSection = document.getElementById('quiz-section');
+                this.resultsSection = document.getElementById('results-section');
+                
+                this.quizTitleBadge = document.getElementById('quiz-title-badge');
+                this.currentQuestionNum = document.getElementById('current-question-num');
+                this.totalQuestionsNum = document.getElementById('total-questions-num');
+                this.progressBarFill = document.getElementById('progress-bar-fill');
+                this.questionText = document.getElementById('question-text');
+                this.optionsContainer = document.getElementById('options-container');
+                this.prevBtn = document.getElementById('prev-btn');
+                this.nextBtn = document.getElementById('next-btn');
+            }
+
+            showHome() {
+                this.quizSection.classList.add('hidden');
+                this.resultsSection.classList.add('hidden');
+                this.heroSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            startQuiz(type) {
+                this.currentType = type;
+                this.currentIndex = 0;
+                this.answers = new Array(QUIZ_DATA[type].questions.length).fill(null);
+
+                this.quizTitleBadge.innerText = QUIZ_DATA[type].title;
+                this.totalQuestionsNum.innerText = QUIZ_DATA[type].questions.length;
+
+                this.heroSection.classList.add('hidden');
+                this.resultsSection.classList.add('hidden');
+                this.quizSection.classList.remove('hidden');
+
+                this.renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            retakeCurrentQuiz() {
+                if (this.currentType) {
+                    this.startQuiz(this.currentType);
+                } else {
+                    this.showHome();
+                }
+            }
+
+            renderQuestion() {
+                const currentData = QUIZ_DATA[this.currentType].questions[this.currentIndex];
+                
+                // Update text & step counter
+                this.currentQuestionNum.innerText = this.currentIndex + 1;
+                this.questionText.innerText = currentData.question;
+
+                // Update Progress bar width
+                const progressPercent = ((this.currentIndex + 1) / QUIZ_DATA[this.currentType].questions.length) * 100;
+                this.progressBarFill.style.width = `${progressPercent}%`;
+
+                // Render Options
+                this.optionsContainer.innerHTML = '';
+                currentData.options.forEach((opt, idx) => {
+                    const isSelected = this.answers[this.currentIndex] === opt.category;
+                    
+                    const btn = document.createElement('button');
+                    btn.className = `option-btn w-full text-left p-4 sm:p-5 rounded-2xl border border-slate-800 glass-card text-sm sm:text-base font-medium flex items-center justify-between group ${isSelected ? 'selected' : ''}`;
+                    btn.onclick = () => this.selectOption(opt.category);
+
+                    btn.innerHTML = `
+                        <div class="flex items-center space-x-3.5">
+                            <span class="w-8 h-8 rounded-xl bg-slate-800 text-slate-300 group-hover:bg-brand-600 group-hover:text-white flex items-center justify-center text-xs font-bold transition-colors">
+                                ${String.fromCharCode(65 + idx)}
+                            </span>
+                            <span class="text-slate-200 group-hover:text-white transition-colors">${opt.text}</span>
+                        </div>
+                        <div class="w-5 h-5 rounded-full border border-slate-600 flex items-center justify-center group-hover:border-brand-400">
+                            <div class="w-2.5 h-2.5 rounded-full bg-brand-400 ${isSelected ? 'block' : 'hidden'}"></div>
+                        </div>
+                    `;
+                    this.optionsContainer.appendChild(btn);
+                });
+
+                // Update Button states
+                this.prevBtn.disabled = this.currentIndex === 0;
+                this.nextBtn.disabled = this.answers[this.currentIndex] === null;
+                
+                if (this.currentIndex === QUIZ_DATA[this.currentType].questions.length - 1) {
+                    this.nextBtn.innerHTML = `See Results <i class="fa-solid fa-chart-line ml-2"></i>`;
+                } else {
+                    this.nextBtn.innerHTML = `Next <i class="fa-solid fa-arrow-right ml-2"></i>`;
+                }
+            }
+
+            selectOption(category) {
+                this.answers[this.currentIndex] = category;
+                this.renderQuestion();
+            }
+
+            previousQuestion() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.renderQuestion();
+                }
+            }
+
+            nextQuestion() {
+                const total = QUIZ_DATA[this.currentType].questions.length;
+                if (this.currentIndex < total - 1) {
+                    this.currentIndex++;
+                    this.renderQuestion();
+                } else {
+                    this.calculateAndShowResults();
+                }
+            }
+
+            calculateAndShowResults() {
+                // Score tally map
+                const scores = { analytical: 0, strategic: 0, creative: 0, leadership: 0 };
+                
+                this.answers.forEach(cat => {
+                    if (cat && scores.hasOwnProperty(cat)) {
+                        scores[cat]++;
+                    }
+                });
+
+                // Find top scoring archetype category
+                let topCategory = 'strategic';
+                let maxScore = -1;
+
+                Object.keys(scores).forEach(cat => {
+                    if (scores[cat] > maxScore) {
+                        maxScore = scores[cat];
+                        topCategory = cat;
+                    }
+                });
+
+                const archetype = ARCHETYPES[topCategory];
+                const totalQuestions = this.answers.length;
+                const matchPercentage = Math.round((maxScore / totalQuestions) * 100);
+
+                // Populate Result Screen
+                document.getElementById('result-archetype').innerText = archetype.title;
+                document.getElementById('result-match-badge').innerText = `${matchPercentage}% Profile Alignment`;
+                document.getElementById('result-description').innerText = archetype.description;
+
+                // Tags
+                const tagsContainer = document.getElementById('result-tags');
+                tagsContainer.innerHTML = '';
+                archetype.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-300';
+                    tagEl.innerText = tag;
+                    tagsContainer.appendChild(tagEl);
+                });
+
+                // Trait Bars
+                const traitBars = document.getElementById('trait-bars');
+                traitBars.innerHTML = '';
+                const categoryNames = {
+                    analytical: "Analytical & Data Logic",
+                    strategic: "Strategic & Cross-Domain",
+                    creative: "Creative & Interactive",
+                    leadership: "Execution & Leadership"
+                };
+
+                Object.keys(scores).forEach(cat => {
+                    const pct = Math.round((scores[cat] / totalQuestions) * 100);
+                    const barItem = document.createElement('div');
+                    barItem.innerHTML = `
+                        <div class="flex justify-between mb-1 font-medium text-slate-300">
+                            <span>${categoryNames[cat]}</span>
+                            <span>${pct}%</span>
+                        </div>
+                        <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-brand-500" style="width: ${pct}%"></div>
+                        </div>
+                    `;
+                    traitBars.appendChild(barItem);
+                });
+
+                // Recommended Career Paths
+                const pathsContainer = document.getElementById('recommended-paths');
+                pathsContainer.innerHTML = '';
+                archetype.paths.forEach(path => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center space-x-2.5';
+                    li.innerHTML = `
+                        <i class="fa-solid fa-circle-check text-accent-emerald text-xs"></i>
+                        <span class="font-medium">${path}</span>
+                    `;
+                    pathsContainer.appendChild(li);
+                });
+
+                // Show screen
+                this.quizSection.classList.add('hidden');
+                this.resultsSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Initialize App on DOM Load
+        let app;
+        window.addEventListener('DOMContentLoaded', () => {
+            app = new QuizApp();
+        });
+    </script>
+</body>
+</html>
